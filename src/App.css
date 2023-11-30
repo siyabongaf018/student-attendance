@@ -1,0 +1,32 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.studentlist{
+  justify-content: space-between;
+  display: flex;
+}
+.studentAttendance{
+  padding: 2px;
+  width: 150px;
+  border: 1px solid black;
+}
+.borderred{
+  border: 1px solid red;
+  
+}
+.bordergreen{
+  border: 1.5px solid green;
+  
+}
+
+.studentAttendance span{
+  background-color: red;
+  width: 10px;
+}
+
+
+
