@@ -1,6 +1,7 @@
 import './App.css'
+import Attcopy from './Components/Attcopy'
 import Attendace from './Components/Attendace'
-
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 
 function App() {
   /*{
@@ -21,7 +22,18 @@ function App() {
 }*/
   return ( 
     <>
-    <Attendace/>
+    {/* <Attendace/> */}
+    {/* <Attcopy/> */}
+    
+    <BrowserRouter>
+    <Routes>
+    <Route path='/' element={<Attendace/>}></Route>
+      <Route path='/copy' element={<Attcopy/>}></Route>
+      
+
+    </Routes>
+    
+    </BrowserRouter>
       
     </>
   )

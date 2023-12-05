@@ -1,158 +1,200 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Attendace = () => {
-  const [studetRegister, setStudetRegister] = useState([]);
-  const [studentGroup, setStudentGroup] = useState(true);
-  const [markAllStudentPresents, setMarkAllStudentPresents] = useState(false);
-  const [filteredStudetRegister, setfilteredStudetRegister] = useState([]);
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [attendance, setAttendanceData] = useState([]);
+  const [selectedGroup, setSelectedGroup] = useState(null);
+  const navigate = useNavigate();
+  const [currentDate, setCurrentDate] = useState(
+    new Date().toISOString().split("T")[0]
+  );
 
-  useEffect(() => {
-    axios.get("http://localhost:3000/attendance").then((response) => {
-      const updatedRegister = response.data.map((student) => ({
-        isPresent: false,
-        ...student,
-      }));
+  // const currentDate = new Date().toISOString().split("T")[0];
+  //  const currentDate="2023-12-06";
 
-      setStudetRegister(updatedRegister);
-      setfilteredStudetRegister(
-        response.data.filter((student) => student.group.includes("Samsung"))
-      );
-    });
-  }, []);
-
-  const changeSelectedGroup = () => {
-    if (studentGroup) {
-      const filteredStudents = studetRegister.filter((student) =>
-        student.group.includes("Samsung")
-      );
-      setfilteredStudetRegister(filteredStudents);
-    } else {
-      const filteredStudents = studetRegister.filter((student) =>
-        student.group.includes("MICSITA")
-      );
-      setfilteredStudetRegister(filteredStudents);
-    }
+  const updateAttendance = (studentId, date) => {
+    setAttendanceData((prevAttendance) =>
+      prevAttendance.map((student) =>
+        student.id === studentId
+          ? {
+              ...student,
+              date: student.date.map((entry) =>
+                entry.date === date
+                  ? { ...entry, isPresent: !entry.isPresent }
+                  : entry
+              ),
+            }
+          : student
+      )
+    );
   };
-
-  useEffect(() => {
-    changeSelectedGroup();
-  }, [studentGroup]);
-
-  useEffect(() => {
-    changeAllStudentAttendance();
-  }, [markAllStudentPresents]);
 
   const markAllPresent = () => {
-    setMarkAllStudentPresents((prevState) => !prevState);
-  };
-
-  const changeAllStudentAttendance = () => {
-    let selectedStudentGroup = "";
-    if (studentGroup) {
-      selectedStudentGroup = "Samsung";
-    } else {
-      selectedStudentGroup = "MICSITA";
-    }
-
-    setStudetRegister((prevRegister) =>
-      prevRegister.map((student) =>
-        student.group === selectedStudentGroup
-          ? { ...student, isPresent: markAllStudentPresents }
-          : student
-      )
-    );
-
-    setfilteredStudetRegister((prevRegister) =>
-      prevRegister.map((student) =>
-        student.group === selectedStudentGroup
-          ? { ...student, isPresent: markAllStudentPresents }
+    setAttendanceData((prevAttendance) =>
+      prevAttendance.map((student) =>
+        selectedGroup && student.group === selectedGroup
+          ? {
+              ...student,
+              date: student.date.map((entry) => ({
+                ...entry,
+                isPresent: true,
+              })),
+            }
           : student
       )
     );
   };
 
-  const handleTogglePresence = (id) => {
-    setStudetRegister((prevRegister) =>
-      prevRegister.map((student) =>
-        student.id === id
-          ? { ...student, isPresent: !student.isPresent }
-          : student
-      )
-    );
-
-    setfilteredStudetRegister((prevRegister) =>
-      prevRegister.map((student) =>
-        student.id === id
-          ? { ...student, isPresent: !student.isPresent }
+  const markAllAbsent = () => {
+    setAttendanceData((prevAttendance) =>
+      prevAttendance.map((student) =>
+        selectedGroup && student.group === selectedGroup
+          ? {
+              ...student,
+              date: student.date.map((entry) => ({
+                ...entry,
+                isPresent: false,
+              })),
+            }
           : student
       )
     );
   };
 
-  const handleSubmit = () => {
-    // axios.post("http://localhost:3000/attendance", { data: studetRegister })
-    //   .then((response) => {
-    //     console.log("Attendance submitted successfully!");
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error submitting attendance:", error);
-    //   });
+  const filterByGroup = (group) => {
+    setSelectedGroup(group);
   };
+
+  const submitData = async () => {
+    const MAX_CONCURRENT_REQUESTS = 6;
+
+    await Promise.all(
+      Array.from(
+        { length: Math.ceil(attendance.length / MAX_CONCURRENT_REQUESTS) },
+        async (_, index) => {
+          const start = index * MAX_CONCURRENT_REQUESTS;
+          const end = start + MAX_CONCURRENT_REQUESTS;
+          const batch = attendance.slice(start, end);
+
+          await Promise.all(
+            batch.map(async (student) => {
+              try {
+                const currentDate2 = new Date().toISOString().split("T")[0];
+                const response = await axios.put(
+                  `http://localhost:3000/attendance/${student.id}`,
+                  {
+                    id: student.id,
+                    name: student.name,
+                    surname: student.surname,
+                    group: student.group,
+                    date: student.date.map((entry) =>
+                      entry.date === currentDate2
+                        ? { ...entry, isPresent: entry.isPresent }
+                        : entry
+                    ),
+                  }
+                );
+
+                console.log(
+                  `Data for student ${student.id} updated successfully:`,
+                  response.data
+                );
+              } catch (studentError) {
+                console.error(
+                  `Error updating data for student ${student.id}:`,
+                  studentError
+                );
+              }
+            })
+          );
+        }
+      )
+    );
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/attendance");
+
+        // Check if the current date entry already exists
+        const updatedData = response.data.map((student) => {
+          const hasCurrentDateEntry = student.date.some(
+            (entry) => entry.date === currentDate
+          );
+
+          return {
+            ...student,
+            date: hasCurrentDateEntry
+              ? student.date
+              : [...student.date, { date: currentDate, isPresent: false }],
+          };
+        });
+
+        setAttendanceData(updatedData);
+        setSelectedGroup("Samsung");
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const filteredData = selectedGroup
+    ? attendance.filter((student) => student.group === selectedGroup)
+    : attendance;
 
   return (
     <div>
-      <h1>Attendance</h1>
-
-      <div className="content">
-        <button
-          onClick={() => {
-            setStudentGroup(true);
-          }}
-        >
-          Samsung GROUP
-        </button>
-        <button
-          onClick={() => {
-            setStudentGroup(false);
-          }}
-        >
-          MICSITA GROUP
-        </button>
-      </div>
-      <div className="showStudentRegister">
-        {studentGroup ? <h2>Samsung GROUP</h2> : <h2>MICSITA GROUP</h2>}
-        <button
-          onClick={markAllPresent}
-          style={{ color: !markAllStudentPresents ? "green" : "red" }}
-        >
-          MARK ALL {!markAllStudentPresents ? "PRESENT" : "ABSENT"}
-        </button>
-      </div>
-
-      <br /><h3>Date: {currentDate.toDateString()}</h3>
-      <hr />
-
-      <div className="studentlist">
-        {filteredStudetRegister.map((student) => (
-          <div
-            onClick={() => handleTogglePresence(student.id)}
-            key={student.id}
-            style={{
-              border: student.isPresent ? "1px solid green" : "1px solid red",
-              cursor: "pointer",
-            }}
-          >
-            <p>{`${student.name} ${student.surname}`}</p>
-            <p>{`Group: ${student.group}`}</p>
-          </div>
+      <h1>Attendance </h1>
+      <div>
+        Filter by Group:{" "}
+        {["Samsung", "MICSITA"].map((group) => (
+          <button key={group} onClick={() => filterByGroup(group)}>
+            {group}
+          </button>
         ))}
       </div>
-      <br />
-      <div className="submit_btn">
-        <button onClick={handleSubmit}>SUBMIT</button>
-      </div>
+
+      <h1>{selectedGroup}</h1>
+
+      <button onClick={markAllPresent}>Mark All Present</button>
+      <button onClick={markAllAbsent}>Mark All Absent</button>
+      <ul>
+        {filteredData.map((student) => (
+          <div key={student.id}>
+            <li key={student.id}>
+              {`${student.name} ${student.surname}, Group: ${student.group}`}
+              <ul>
+                {student.date.map(
+                  (entry, index) =>
+                    entry.date === currentDate && (
+                      <li
+                        key={index}
+                        style={{ color: entry.isPresent ? "green" : "red" }}
+                      >
+                        {`${entry.date}: ${
+                          entry.isPresent ? "Present" : "Absent"
+                        }`}
+                        <button
+                          onClick={() =>
+                            updateAttendance(student.id, entry.date)
+                          }
+                        >
+                          Toggle Presence
+                        </button>
+                      </li>
+                    )
+                )}
+              </ul>
+            </li>
+            <br />
+          </div>
+        ))}
+      </ul>
+      <button onClick={submitData}>Submit Data</button>
     </div>
   );
 };

@@ -5,85 +5,240 @@
       "name": "John",
       "surname": "Mac",
       "group": "Samsung",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": true
+        }
+      ]
     },
     {
       "id": 2,
       "name": "John 2",
       "surname": "Mac",
       "group": "Samsung",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": true
+        }
+      ]
     },
     {
       "id": 3,
       "name": "John 3",
       "surname": "Mac",
       "group": "Samsung",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": false
+        }
+      ]
     },
     {
       "id": 4,
       "name": "John 4",
       "surname": "Mac",
       "group": "Samsung",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": false
+        }
+      ]
     },
     {
       "id": 5,
       "name": "John 5 ",
       "surname": "Mac",
       "group": "Samsung",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": false
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": false
+        }
+      ]
     },
     {
       "id": 6,
       "name": "John 6",
       "surname": "Mac",
       "group": "Samsung",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": false
+        }
+      ]
     },
     {
       "id": 7,
       "name": "John 7",
       "surname": "Mac",
       "group": "MICSITA",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": true
+        }
+      ]
     },
     {
       "id": 8,
       "name": "John 8",
       "surname": "Mac",
       "group": "MICSITA",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": true
+        }
+      ]
     },
     {
       "id": 9,
       "name": "John 9",
       "surname": "Mac",
       "group": "MICSITA",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": false
+        }
+      ]
     },
     {
       "id": 10,
       "name": "John 10",
       "surname": "Mac",
       "group": "MICSITA",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": false
+        }
+      ]
     },
     {
       "id": 11,
       "name": "John 11",
       "surname": "Mac",
       "group": "MICSITA",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": false
+        }
+      ]
     },
     {
       "id": 12,
       "name": "John 12",
       "surname": "Mac",
       "group": "MICSITA",
-      "date": []
+      "date": [
+        {
+          "date": "2023-12-04",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-05",
+          "isPresent": true
+        },
+        {
+          "date": "2023-12-06",
+          "isPresent": false
+        }
+      ]
     }
-    
   ]
 }
