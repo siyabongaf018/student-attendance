@@ -7,16 +7,8 @@
       "group": "Samsung",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": true
+          "date": "2024-01-18",
+          "present": false
         }
       ]
     },
@@ -27,16 +19,8 @@
       "group": "Samsung",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": true
+          "date": "2024-01-18",
+          "present": false
         }
       ]
     },
@@ -47,16 +31,8 @@
       "group": "Samsung",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": false
+          "date": "2024-01-18",
+          "present": false
         }
       ]
     },
@@ -67,16 +43,8 @@
       "group": "Samsung",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": false
+          "date": "2024-01-18",
+          "present": false
         }
       ]
     },
@@ -87,16 +55,8 @@
       "group": "Samsung",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": false
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": false
+          "date": "2024-01-18",
+          "present": false
         }
       ]
     },
@@ -107,16 +67,8 @@
       "group": "Samsung",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": false
+          "date": "2024-01-18",
+          "present": false
         }
       ]
     },
@@ -127,16 +79,8 @@
       "group": "MICSITA",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": true
+          "date": "2024-01-18",
+          "present": true
         }
       ]
     },
@@ -147,16 +91,8 @@
       "group": "MICSITA",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": true
+          "date": "2024-01-18",
+          "present": true
         }
       ]
     },
@@ -167,16 +103,8 @@
       "group": "MICSITA",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": false
+          "date": "2024-01-18",
+          "present": true
         }
       ]
     },
@@ -187,16 +115,8 @@
       "group": "MICSITA",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": false
+          "date": "2024-01-18",
+          "present": true
         }
       ]
     },
@@ -207,16 +127,8 @@
       "group": "MICSITA",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": false
+          "date": "2024-01-18",
+          "present": true
         }
       ]
     },
@@ -227,16 +139,8 @@
       "group": "MICSITA",
       "date": [
         {
-          "date": "2023-12-04",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-05",
-          "isPresent": true
-        },
-        {
-          "date": "2023-12-06",
-          "isPresent": false
+          "date": "2024-01-18",
+          "present": true
         }
       ]
     }

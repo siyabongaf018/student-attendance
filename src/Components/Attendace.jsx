@@ -21,7 +21,7 @@ const Attendace = () => {
               ...student,
               date: student.date.map((entry) =>
                 entry.date === date
-                  ? { ...entry, isPresent: !entry.isPresent }
+                  ? { ...entry, present: !entry.present }
                   : entry
               ),
             }
@@ -38,7 +38,7 @@ const Attendace = () => {
               ...student,
               date: student.date.map((entry) => ({
                 ...entry,
-                isPresent: true,
+                present: true,
               })),
             }
           : student
@@ -54,7 +54,7 @@ const Attendace = () => {
               ...student,
               date: student.date.map((entry) => ({
                 ...entry,
-                isPresent: false,
+                present: false,
               })),
             }
           : student
@@ -90,7 +90,7 @@ const Attendace = () => {
                     group: student.group,
                     date: student.date.map((entry) =>
                       entry.date === currentDate2
-                        ? { ...entry, isPresent: entry.isPresent }
+                        ? { ...entry, present: entry.present }
                         : entry
                     ),
                   }
@@ -112,7 +112,7 @@ const Attendace = () => {
       )
     );
   };
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -128,7 +128,7 @@ const Attendace = () => {
             ...student,
             date: hasCurrentDateEntry
               ? student.date
-              : [...student.date, { date: currentDate, isPresent: false }],
+              : [...student.date, { date: currentDate, present: false }],
           };
         });
 
@@ -148,6 +148,8 @@ const Attendace = () => {
 
   return (
     <div>
+      <button onClick={()=>navigate("/register")}>click to get the register with backend</button>
+      <hr/>
       <h1>Attendance </h1>
       <div>
         Filter by Group:{" "}
@@ -173,10 +175,10 @@ const Attendace = () => {
                     entry.date === currentDate && (
                       <li
                         key={index}
-                        style={{ color: entry.isPresent ? "green" : "red" }}
+                        style={{ color: entry.present ? "green" : "red" }}
                       >
                         {`${entry.date}: ${
-                          entry.isPresent ? "Present" : "Absent"
+                          entry.present ? "Present" : "Absent"
                         }`}
                         <button
                           onClick={() =>
