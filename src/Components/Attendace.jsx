@@ -157,7 +157,7 @@ const Attendace = () => {
           <button key={group} onClick={() => filterByGroup(group)}>
             {group}
           </button>
-        ))}
+        ))} 
       </div>
 
       <h1>{selectedGroup}</h1>

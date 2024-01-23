@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 const AttendanceRegister = () => {
   const [attendance, setAttendanceData] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
+  // const [currentDate, setCurrentDate] = useState(new Date().toISOString().split("T")[0]);
   const [currentDate, setCurrentDate] = useState(new Date().toISOString().split("T")[0]);
+
   const [inputDate, setInputDate] = useState(currentDate); 
 
   const navigate = useNavigate();
@@ -110,8 +112,9 @@ const AttendanceRegister = () => {
           </button>
         ))}
       </div>
+      <br/>
 
-      <label>Select Date:</label>
+      <label className="dateLabel">Select Date:</label>
       <input
         type="date"
         className="dateInput"
@@ -123,32 +126,31 @@ const AttendanceRegister = () => {
 
       <button onClick={() => markAllPresentOrAbsent(true)}>Mark All Present</button>
       <button onClick={() => markAllPresentOrAbsent(false)}>Mark All Absent</button>
-      <ul>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "20px" }}>
         {filteredData.map((student) => (
-          <div key={student.id}>
-            <li key={student.id}>
+          <div key={student.id} className="card">
               {`${student.name} ${student.surname}, Group: ${student.group}`}
-              <ul>
+              <h4>
                 {student.date.map(
                   (entry, index) =>
                     entry.date === inputDate && (
-                      <li
-                        key={index}
-                        style={{ color: entry.present ? "green" : "red" }}
-                      >
+                      < span key={index} style={{ color: entry.present ? "green" : "red" }}>
                         {`${entry.date}: ${entry.present ? "Present" : "Absent"}`}
-                        <button onClick={() => updateAttendance(student.id, entry.date)}>
+                        
+                        <button
+                          onClick={() => updateAttendance(student.id, entry.date)}
+                          className="toggleButton"
+                        >
                           Toggle Presence
                         </button>
-                      </li>
+                      </span>
                     )
                 )}
-              </ul>
-            </li>
-            <br />
+              </h4>
+            
           </div>
         ))}
-      </ul>
+      </div><br />
       <button onClick={submitData}>Submit Data</button>
     </div>
   );
